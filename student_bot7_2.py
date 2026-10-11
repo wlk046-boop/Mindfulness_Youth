@@ -32,7 +32,7 @@ DEVELOPER_CHAT_ID = int(os.getenv("DEVELOPER_CHAT_ID", "0"))
 ADMIN_IDS = [cid for cid in (TEACHER_CHAT_ID, DEVELOPER_CHAT_ID, HEAD_TEACHER_CHAT_ID) if cid != 0]
 
 # 🟢 Batch ID သတ်မှတ်ခြင်း (၁၆ ယောက်အုပ်စုအတွက်)
-BATCH_ID = os.getenv("BATCH_ID", "batch_16")
+BATCH_ID = os.getenv("BATCH_ID", "batch_Youth")
 
 # Supabase Credentials (.env မှတဆင့် ခေါ်ယူခြင်း)
 DB_USER = os.getenv("DB_USER")
@@ -51,7 +51,7 @@ app = FastAPI()
 @app.get("/")
 @app.head("/")
 def health_check():
-    return {"status": "active", "bot": "Student Bot (Batch 16) is running successfully!"}
+    return {"status": "active", "bot": "Student Bot (Batch Youth) is running successfully!"}
 
 def run_fastapi():
     port = int(os.environ.get("PORT", 10000))
@@ -93,7 +93,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     text = (
-        f"မင်္ဂလာပါ {user.first_name} 🙏 (Batch 16)\n\n"
+        f"မင်္ဂလာပါ {user.first_name} 🙏 (Batch Youth)\n\n"
         "ဤ Bot သည် နေ့စဉ် သတိပဋ္ဌာန်နှင့် စိတ်လေ့ကျင့်မှု (Mindfulness Routine) များကို မှတ်သားပေးမည့် Bot ဖြစ်ပါသည်။\n\n"
         "• မနက်ပိုင်း (5:00 AM - 12:00 PM)\n"
         "• နေ့လည်ပိုင်း (12:00 PM - 5:00 PM)\n"
@@ -156,7 +156,7 @@ async def handle_student_qa(update: Update, context: ContextTypes.DEFAULT_TYPE):
             user.id, user.first_name, today, text
         )
 
-    await update.message.reply_text("✅ ဆရာ့ထံ အကြောင်းကြားစာ ပို့လိုက်ပါပြီခင်ဗျာ[cite: 3]။")
+    await update.message.reply_text("✅ ဆရာ့ထံ အကြောင်းကြားစာ ပို့လိုက်ပါပြီခင်ဗျာ။")
 
     if TEACHER_BOT_TOKEN and ADMIN_IDS:
         keyboard = [
@@ -221,11 +221,11 @@ async def handle_dismiss_batch(update: Update, context: ContextTypes.DEFAULT_TYP
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="🗑️ ထပ်နေသော စာရင်းကို အောင်မြင်စွာ ပယ်ဖျက်ပြီးပါပြီခင်ဗျာ[cite: 3]."
+        text="🗑️ ထပ်နေသော စာရင်းကို အောင်မြင်စွာ ပယ်ဖျက်ပြီးပါပြီခင်ဗျာ."
     )
 
 async def cmd_my_detail_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """ကျောင်းသား ကိုယ်တိုင် မိမိ၏ အသေးစိတ် အစီရင်ခံစာကို ကြည့်ရှုခြင်း (Batch 16)"""
+    """ကျောင်းသား ကိုယ်တိုင် မိမိ၏ အသေးစိတ် အစီရင်ခံစာကို ကြည့်ရှုခြင်း (Batch Youth)"""
     user_id = update.effective_user.id
     today = datetime.now(MM_TZ).date()
     start_date = today - timedelta(days=7)
@@ -238,7 +238,7 @@ async def cmd_my_detail_report(update: Update, context: ContextTypes.DEFAULT_TYP
         )
 
         if not student:
-            await update.message.reply_text("❌ သင်သည် ဤ Batch 16 စာရင်းသွင်းထားသော သင်တန်းသား အဖြစ် မှတ်တမ်းတင်ထားခြင်း မရှိသေးပါ။")
+            await update.message.reply_text("❌ သင်သည် ဤ Batch Youth စာရင်းသွင်းထားသော သင်တန်းသား အဖြစ် မှတ်တမ်းတင်ထားခြင်း မရှိသေးပါ။")
             return
 
         await generate_and_send_report(update, context, student["student_id"], student["student_name"], start_date, today)
