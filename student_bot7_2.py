@@ -51,7 +51,7 @@ app = FastAPI()
 @app.get("/")
 @app.head("/")
 def health_check():
-    return {"status": "active", "bot": "Student Bot (Batch Youth) is running successfully!"}
+    return {"status": "active", "bot": "Student Bot (Batch Inner Engineering) is running successfully!"}
 
 def run_fastapi():
     port = int(os.environ.get("PORT", 10000))
@@ -93,7 +93,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     text = (
-        f"မင်္ဂလာပါ {user.first_name} 🙏 (Batch Youth)\n\n"
+        f"မင်္ဂလာပါ {user.first_name} 🙏 (Batch Inner Engineering)\n\n"
         "ဤ Bot သည် နေ့စဉ် သတိပဋ္ဌာန်နှင့် စိတ်လေ့ကျင့်မှု (Mindfulness Routine) များကို မှတ်သားပေးမည့် Bot ဖြစ်ပါသည်။\n\n"
         "• မနက်ပိုင်း (5:00 AM - 12:00 PM)\n"
         "• နေ့လည်ပိုင်း (12:00 PM - 5:00 PM)\n"
@@ -156,7 +156,7 @@ async def handle_student_qa(update: Update, context: ContextTypes.DEFAULT_TYPE):
             user.id, user.first_name, today, text
         )
 
-    await update.message.reply_text("✅ ဆရာ့ထံ အကြောင်းကြားစာ ပို့လိုက်ပါပြီခင်ဗျာ[cite: 3]။")
+    await update.message.reply_text("✅ ဆရာ့ထံ အကြောင်းကြားစာ ပို့လိုက်ပါပြီခင်ဗျာ။")
 
     if TEACHER_BOT_TOKEN and ADMIN_IDS:
         keyboard = [
@@ -171,7 +171,7 @@ async def handle_student_qa(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         student_username = f"@{user.username}" if user.username else "မရှိပါ"
         alert_msg = (
-            f"📩 တပည့်ထံမှ စာ/တောင်းဆိုချက် ရောက်ရှိပါသည် (Batch Youth)\n"
+            f"📩 တပည့်ထံမှ စာ/တောင်းဆိုချက် ရောက်ရှိပါသည် (Batch Inner Engineering)\n"
             f"━━━━━━━━━━━━━━━━━━━━\n"
             f"👤 တပည့်: {user.first_name}\n"
             f"🆔 ID: {user.id}\n"
@@ -255,11 +255,11 @@ async def handle_dismiss_batch2(update: Update, context: ContextTypes.DEFAULT_TY
 
     await context.bot.send_message(
         chat_id=chat_id,
-        text="🗑️ ထပ်နေသော စာရင်းကို အောင်မြင်စွာ ပယ်ဖျက်ပြီးပါပြီခင်ဗျာ[cite: 3]."
+        text="🗑️ ထပ်နေသော စာရင်းကို အောင်မြင်စွာ ပယ်ဖျက်ပြီးပါပြီခင်ဗျာ."
     )
 
 async def cmd_my_detail_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """ကျောင်းသား ကိုယ်တိုင် မိမိ၏ အသေးစိတ် အစီရင်ခံစာကို ကြည့်ရှုခြင်း (Batch Youth)"""
+    """ကျောင်းသား ကိုယ်တိုင် မိမိ၏ အသေးစိတ် အစီရင်ခံစာကို ကြည့်ရှုခြင်း (Batch Inner Engineering)"""
     user_id = update.effective_user.id
     today = datetime.now(MM_TZ).date()
     start_date = today - timedelta(days=7)
@@ -272,7 +272,7 @@ async def cmd_my_detail_report(update: Update, context: ContextTypes.DEFAULT_TYP
         )
 
         if not student:
-            await update.message.reply_text("❌ သင်သည် ဤ Batch Youth စာရင်းသွင်းထားသော သင်တန်းသား အဖြစ် မှတ်တမ်းတင်ထားခြင်း မရှိသေးပါ။")
+            await update.message.reply_text("❌ သင်သည် ဤ Batch Inner Engineering စာရင်းသွင်းထားသော သင်တန်းသား အဖြစ် မှတ်တမ်းတင်ထားခြင်း မရှိသေးပါ။")
             return
 
         await generate_and_send_report(update, context, student["student_id"], student["student_name"], start_date, today)
@@ -309,7 +309,7 @@ async def generate_and_send_report(update_or_query, context, student_id, student
             await update_or_query.message.reply_text(msg)
         return
 
-    report_text = f"📊 {student_name} ၏ (၇) ရက်တာ အစီရင်ခံစာ (Batch Youth)\n\n"
+    report_text = f"📊 {student_name} ၏ (၇) ရက်တာ အစီရင်ခံစာ (Batch Inner Engineering)\n\n"
     done_count = sum(1 for r in rows if r["is_done"])
     total_count = len(rows)
     report_text += f"✅ ပြီးစီးမှု: {done_count}/{total_count} Tasks\n"
@@ -370,7 +370,7 @@ def main():
     app_bot.add_handler(CommandHandler("my_detail_report", cmd_my_detail_report))
     app_bot.add_error_handler(error_handler)
 
-    print("🚀 Student Bot (Batch Youth) is starting polling...")
+    print("🚀 Student Bot (Batch Inner Engineering) is starting polling...")
     app_bot.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
